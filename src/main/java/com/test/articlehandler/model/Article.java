@@ -4,6 +4,7 @@ package com.test.articlehandler.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,13 +17,13 @@ public class Article {
     private String title;
     private String content;
     private Date publicationDate;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "article_category",
             joinColumns = @JoinColumn(name = "article_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private Set<Category> categories;
+    private List<Category> categories; //list
 
 
     public Article(){
@@ -61,11 +62,12 @@ public class Article {
         this.publicationDate = publicationDate;
     }
 
-    public Set<Category> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
+
+    public void setCategories(List<Category> categories) {
+        this.categories=categories;
     }
 }

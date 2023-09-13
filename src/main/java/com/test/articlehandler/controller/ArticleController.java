@@ -34,7 +34,7 @@ public class ArticleController {
 
     @PostMapping("/articles/new")
     public ResponseEntity<Article> createArticle(@RequestBody @Valid Article article) {
-        Article result = articleService.save(article);
+        Article result = articleService.saveArticle(article);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
 
@@ -44,7 +44,7 @@ public class ArticleController {
             return ResponseEntity.notFound().build();
         }
         article.setId(id);
-        articleService.save(article);
+        articleService.saveArticle(article);
         return ResponseEntity.noContent().build();
     }
 

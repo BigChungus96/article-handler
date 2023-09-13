@@ -1,18 +1,20 @@
 package com.test.articlehandler.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "categories", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"})})
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
+
     private String name;
 
 
@@ -43,6 +45,7 @@ public class Category {
         this.articles = articles;
     }
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "categories")
     private Set<Article> articles;
 }
