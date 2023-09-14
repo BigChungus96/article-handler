@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "articles")
@@ -23,10 +22,10 @@ public class Article {
             joinColumns = @JoinColumn(name = "article_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private List<Category> categories; //list
+    private List<Category> categories;
 
 
-    public Article(){
+    public Article() {
 
     }
 
@@ -68,6 +67,6 @@ public class Article {
 
 
     public void setCategories(List<Category> categories) {
-        this.categories=categories;
+        this.categories = categories;
     }
 }

@@ -4,6 +4,7 @@ package com.test.articlehandler.controller;
 import com.test.articlehandler.model.Article;
 import com.test.articlehandler.service.ArticleService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,9 +26,9 @@ public class ArticleController {
     }
 
     @GetMapping("/articles/{id}")
-    public ResponseEntity<Article> readArticle(@PathVariable Long id) {
+    public ResponseEntity<?> readArticle(@PathVariable Long id) {
         if (!articleService.articleExists(id)) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Article not found");
         }
         return ResponseEntity.ok(articleService.findArticle(id));
     }
@@ -41,7 +42,7 @@ public class ArticleController {
     @PutMapping("/articles/{id}")
     public ResponseEntity<?> updateArticle(@PathVariable Long id, @Valid @RequestBody Article article) {
         if (!articleService.articleExists(id)) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Article not found");
         }
         article.setId(id);
         articleService.saveArticle(article);
@@ -51,7 +52,7 @@ public class ArticleController {
     @GetMapping("/articles/{id}/delete")
     public ResponseEntity<?> deleteArticle(@PathVariable Long id) {
         if (!articleService.articleExists(id)) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Article not found");
         }
         articleService.deleteArticle(id);
         return ResponseEntity.ok().build();

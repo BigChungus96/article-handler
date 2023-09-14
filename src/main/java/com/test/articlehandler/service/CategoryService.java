@@ -15,7 +15,7 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Category save(Category category){
+    public Category saveCategory(Category category){
         categoryRepository.save(category);
         return category;
     }
@@ -32,5 +32,13 @@ public class CategoryService {
 
     public boolean categoryExists(Long id) {
         return categoryRepository.existsById(id);
+    }
+    public boolean checkIfCategoryExists(Category category){
+        Category existingCategory = categoryRepository.findByName(category.getName());
+        if(existingCategory!=null){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

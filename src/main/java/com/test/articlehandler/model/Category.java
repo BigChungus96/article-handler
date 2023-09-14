@@ -3,6 +3,7 @@ package com.test.articlehandler.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.Set;
 
