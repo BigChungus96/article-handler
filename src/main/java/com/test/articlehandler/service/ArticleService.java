@@ -37,7 +37,7 @@ public class ArticleService {
             article.setCategories(savedCategories);
         }
 
-        return articleRepository.save(article);
+        return articleRepository.save(article); //test
     }
     public List<Article> findAllArticles(){
         return articleRepository.findAll();
